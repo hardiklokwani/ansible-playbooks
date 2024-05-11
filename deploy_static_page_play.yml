@@ -1,0 +1,21 @@
+-
+  name: Install nginx and serve static website
+  hosts: prod
+  become: yes
+  tasks:
+    - name: Install nginx
+      apt:
+        name: nginx
+        state: latest
+
+    - name: Start nginx
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+
+    - name: Deploy webpage
+      copy:
+        src: index.html
+        dest: /var/www/html 
+      
